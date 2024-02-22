@@ -1,0 +1,97 @@
+/* StudentManagement.css */
+
+.student-management-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 8px;
+  width: 70%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.search-button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for the table */
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.student-table th,
+.student-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  background-color: #f2f2f2;
+}
+
+.student-table th {
+  background-color: #f2f2f2;
+}
+
+.student-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Styles for buttons */
+.edit-button,
+.delete-button,
+.add-button {
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  margin-right: 5px;
+}
+
+.view-button {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+.edit-button {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.add-button {
+  background-color: #3498db;
+  color: #fff;
+}
+
+/* Hover effect for buttons */
+.edit-button:hover,
+.delete-button:hover,
+.add-button:hover {
+  opacity: 0.8;
+}
