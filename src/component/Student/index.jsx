@@ -102,7 +102,7 @@ const StudentManagement = () => {
       <table className="student-table">
         <thead>
           <tr>
-            <th>ID</th>
+            
             <th>Student ID</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -113,7 +113,7 @@ const StudentManagement = () => {
         <tbody>
           {filteredStudents.map((student) => (
             <tr key={student.ID}>
-              <td>{student.ID}</td>
+              
               <td>{student.StudentId}</td>
               <td>{student.FirstName}</td>
               <td>{student.LastName}</td>

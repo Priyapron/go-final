@@ -91,7 +91,7 @@ const SubjectManagement = () => {
       <table className="subject-table">
         <thead>
           <tr>
-            <th>ID</th>
+            
             <th>Subject ID</th>
             <th>Subject Name</th>
             <th>Subject Credit</th>
@@ -101,7 +101,7 @@ const SubjectManagement = () => {
         <tbody>
           {filteredSubjects.map((subject) => (
             <tr key={subject.ID}>
-              <td>{subject.ID}</td>
+              
               <td>{subject.Subject_id}</td>
               <td>{subject.Subject_name}</td>
               <td>{subject.Subject_credit}</td>

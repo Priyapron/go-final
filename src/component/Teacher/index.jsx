@@ -102,7 +102,7 @@ const TeacherManagement = () => {
       <table className="teacher-table">
         <thead>
           <tr>
-            <th>ID</th>
+            
             <th>First Name</th>
             <th>Last Name</th>
             <th>Age</th>
@@ -112,7 +112,7 @@ const TeacherManagement = () => {
         <tbody>
           {filteredTeachers.map((teacher) => (
             <tr key={teacher.ID}>
-              <td>{teacher.ID}</td>
+              
               <td>{teacher.FirstName}</td>
               <td>{teacher.LastName}</td>
               <td>{teacher.Age}</td>

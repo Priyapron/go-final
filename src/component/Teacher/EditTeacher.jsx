@@ -34,8 +34,7 @@ function EditTeacher() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // If the field is 'Age', parse it as an integer
-    const parsedValue = name === 'Age' ? parseInt(value, 10) : value;
+    const parsedValue = name === 'Age' ? parseInt(value, 10) || '' : value;
 
     setUpdatedTeacherData((prevData) => ({
       ...prevData,
@@ -59,6 +58,11 @@ function EditTeacher() {
     }
   };
 
+  const handleCancel = () => {
+    // Add logic to handle cancel, e.g., navigate back to the teacher list
+    window.location.href = '/teacher'; // Replace with the appropriate path
+  };
+
   if (!teacher) {
     return <p>Loading...</p>; // You can customize the loading indicator as needed
   }
@@ -67,7 +71,6 @@ function EditTeacher() {
     <div className="edit-teacher-container">
       <h2>Edit Teacher</h2>
       <form onSubmit={handleSubmit}>
-        {/* Display fetched teacher data */}
         <div className="mb-3">
           <label htmlFor="FirstName" className="form-label">
             First Name
@@ -101,7 +104,7 @@ function EditTeacher() {
             Age
           </label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="Age"
             name="Age"
@@ -114,7 +117,9 @@ function EditTeacher() {
           <button type="submit" className="btn btn-primary">
             Update
           </button>
-          <button className="btn btn-secondary">Cancel</button>
+          <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+            Cancel
+          </button>
         </div>
       </form>
     </div>

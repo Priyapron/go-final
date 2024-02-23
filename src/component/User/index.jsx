@@ -103,7 +103,7 @@ const UserManagement = () => {
       <table className="user-table">
         <thead>
           <tr>
-            <th>ID</th>
+            
             <th>Name</th>
             <th>Email</th>
             <th>Profile</th>
@@ -113,7 +113,7 @@ const UserManagement = () => {
         <tbody>
           {filteredUsers.map((filteredUser) => (
             <tr key={filteredUser.ID}>
-              <td>{filteredUser.ID}</td>
+              
               <td>{filteredUser.Name}</td>
               <td>{filteredUser.Email}</td>
               <td>{filteredUser.Profile}</td>
