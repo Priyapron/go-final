@@ -1,9 +1,7 @@
-// EditUser.jsx
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './EditUser.css'; // Import a separate CSS file for styles
+import './EditUser.css';
 
 function EditUser() {
   const { id } = useParams();
@@ -20,9 +18,7 @@ function EditUser() {
         const response = await axios.get(`http://localhost:5000/users/${id}`);
         setUser(response.data);
         setUpdatedUserData({
-          Name: response.data.Name,
-          Email: response.data.Email,
-          Profile: response.data.Profile,
+          ...response.data,  // ใช้ spread operator เพื่อคัดลอกข้อมูลทั้งหมดจาก response.data
         });
       } catch (error) {
         console.error("Error fetching user:", error);
@@ -33,7 +29,12 @@ function EditUser() {
   }, [id]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target; // Change from 'Name' to 'name'
+    const { name, value } = e.target;
+    // ตรวจสอบว่า name เป็น 'Email' หรือไม่
+    if (name === 'Email') {
+      // ถ้าเป็น 'Email' ให้ไม่ทำการเปลี่ยนแปลงค่า
+      return;
+    }
     setUpdatedUserData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -49,8 +50,7 @@ function EditUser() {
         updatedUserData
       );
       console.log("Server response:", response.data);
-      // onClose(); // Uncomment this line if you have a function to close the modal
-      window.location.href = '/user'; // Redirect to your desired path
+      window.location.href = '/user';
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -72,7 +72,7 @@ function EditUser() {
             type="text"
             className="form-control"
             id="Name"
-            Name="Name"
+            name="Name"
             value={updatedUserData.Name}
             onChange={handleChange}
             required
@@ -83,13 +83,14 @@ function EditUser() {
             Email
           </label>
           <input
-            type="Email"
+            type="email"
             className="form-control"
             id="Email"
-            Name="Email"
+            name="Email"
             value={updatedUserData.Email}
             onChange={handleChange}
             required
+            disabled
           />
         </div>
         <div className="mb-3">
@@ -100,7 +101,7 @@ function EditUser() {
             type="text"
             className="form-control"
             id="Profile"
-            Name="Profile"
+            name="Profile"
             value={updatedUserData.Profile}
             onChange={handleChange}
             required

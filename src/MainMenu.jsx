@@ -14,7 +14,8 @@ function MainMenu() {
   }
 
   return (
-    <div className="sidebar">
+    <div class="page-container">
+  <div class="sidebar">
       <nav>
         <ul>
           <li>
@@ -32,8 +33,12 @@ function MainMenu() {
           <li>
             <Link to="/teacher">Teacher Management</Link>
           </li>
+          <li>
+            <Link to="/">Logout</Link>
+          </li>
         </ul>
       </nav>
+      </div>
     </div>
   );
 }

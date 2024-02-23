@@ -1,4 +1,3 @@
-// Login.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -20,6 +19,11 @@ const Login = () => {
     } catch (error) {
       console.error('Error during login:', error.response.data.error);
     }
+  };
+
+  const redirectToRegister = () => {
+    // Redirect to the registration page
+    window.location.href = '/register'; // Adjust the path as needed
   };
 
   return (
@@ -44,6 +48,9 @@ const Login = () => {
         />
       </div>
       <button onClick={handleLogin} style={{ backgroundColor: '#4caf50', color: 'white', padding: '10px 15px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Login</button>
+      <p style={{ marginTop: '10px', textAlign: 'center' }}>
+        Don't have an account? <span style={{ color: '#4caf50', cursor: 'pointer' }} onClick={redirectToRegister}>Register</span>
+      </p>
     </div>
   );
 };

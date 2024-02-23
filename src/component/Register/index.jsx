@@ -1,109 +1,93 @@
+// RegisterUser.jsx
+
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [profile, setProfile] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+const RegisterUser = () => {
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    profile: '',
+    password: '',
+  });
 
-  const handleRegister = async () => {
+  const [isPopupOpen, setPopupOpen] = useState(true);
+
+  const handleClose = () => {
+    setPopupOpen(false);
+    // Redirect to the login page
+    window.location.href = '/'; // Adjust the path as needed
+  };
+
+  const registerUser = async () => {
     try {
-      setLoading(true);
-      const hashedPassword = await hashPassword(password); // Hash the password
-      const response = await axios.post('http://localhost:5000/users/register', {
-        name,
-        email,
-        password: hashedPassword,
-        profile,
+      const response = await axios.post('http://localhost:5000/users', {
+        ...newUser,
+        password: await hashPassword(newUser.password),
       });
-      console.log(response.data); // Handle registration success
-      // Redirect the user or perform other actions upon successful registration
+
+      // Handle registered user data if needed
+      console.log('User registered:', response.data);
+
+      setNewUser({
+        name: '',
+        email: '',
+        profile: '',
+        password: '',
+      });
+
+      handleClose();
     } catch (error) {
-      console.error('Registration failed', error);
-      setError('Registration failed. Please try again.'); // Update the error state
-    } finally {
-      setLoading(false);
+      console.error('Error registering user:', error);
+      // Handle error as needed
     }
   };
 
-  // Function to hash the password
-  const hashPassword = async (plainPassword) => {
-    const response = await axios.post('http://localhost:5000/users/hashPassword', {
-      password: plainPassword,
-    });
-    return response.data.hashedPassword;
+  const hashPassword = async (password) => {
+    return password;
   };
 
   return (
-    <div style={styles.container}>
-      <h1>Register</h1>
-      <div style={styles.formGroup}>
-        <label>Name:</label>
-        <input
-          type="text"
-          placeholder="Your Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div style={styles.formGroup}>
-        <label>Email:</label>
-        <input
-          type="text"
-          placeholder="Your Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div style={styles.formGroup}>
-        <label>Password:</label>
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div style={styles.formGroup}>
-        <label>Profile:</label>
-        <input
-          type="text"
-          placeholder="Your Profile"
-          value={profile}
-          onChange={(e) => setProfile(e.target.value)}
-        />
-      </div>
-      {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
-      <button onClick={handleRegister} disabled={loading} style={styles.submitButton}>
-        {loading ? 'Registering...' : 'Register'}
-      </button>
-    </div>
+    <>
+      {isPopupOpen && (
+        <div className="popup-container">
+          <div className="popup">
+            <h2>Register User</h2>
+            <input
+              type="text"
+              placeholder="Name"
+              value={newUser.name}
+              onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={newUser.email}
+              onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder="Profile"
+              value={newUser.profile}
+              onChange={(e) => setNewUser({ ...newUser, profile: e.target.value })}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={newUser.password}
+              onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+            />
+            <button className="primary" onClick={registerUser}>
+              Register
+            </button>
+            <button className="secondary" onClick={handleClose}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
-const styles = {
-  container: {
-    maxWidth: '400px',
-    margin: 'auto',
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    marginTop: '50px',
-  },
-  formGroup: {
-    marginBottom: '15px',
-  },
-  submitButton: {
-    backgroundColor: '#4CAF50',
-    color: 'white',
-    padding: '10px 15px',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
-};
-
-export default Register;
+export default RegisterUser;

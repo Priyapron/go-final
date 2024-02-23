@@ -64,6 +64,16 @@ const SubjectManagement = () => {
     setIsAddSubjectPopupOpen(false);
   };
 
+  const filteredSubjects = subjects.filter((subject) => {
+    const isMatch =
+      subject.ID.toString().includes(searchQuery) ||
+      subject.Subject_id.toString().includes(searchQuery) ||
+      subject.Subject_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      subject.Subject_credit.toString().includes(searchQuery);
+
+    return isMatch;
+  });
+
   return (
     <div className="subject-management-container">
       <h2>Subject Management</h2>
@@ -71,7 +81,7 @@ const SubjectManagement = () => {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Search by subject name or credit"
+          placeholder="Search by ID, Subject ID, Subject Name, or Subject Credit"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -89,7 +99,7 @@ const SubjectManagement = () => {
           </tr>
         </thead>
         <tbody>
-          {subjects.map((subject) => (
+          {filteredSubjects.map((subject) => (
             <tr key={subject.ID}>
               <td>{subject.ID}</td>
               <td>{subject.Subject_id}</td>

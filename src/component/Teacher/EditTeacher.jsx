@@ -28,7 +28,7 @@ function EditTeacher() {
         console.error("Error fetching teacher:", error);
       }
     };
-  
+
     fetchData();
   }, [id]);
 
@@ -60,13 +60,14 @@ function EditTeacher() {
   };
 
   if (!teacher) {
-    return <p>Loading or error occurred...</p>;
+    return <p>Loading...</p>; // You can customize the loading indicator as needed
   }
 
   return (
     <div className="edit-teacher-container">
       <h2>Edit Teacher</h2>
       <form onSubmit={handleSubmit}>
+        {/* Display fetched teacher data */}
         <div className="mb-3">
           <label htmlFor="FirstName" className="form-label">
             First Name

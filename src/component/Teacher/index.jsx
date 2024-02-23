@@ -74,6 +74,17 @@ const TeacherManagement = () => {
     setIsAddTeacherPopupOpen(false);
   };
 
+  const filteredTeachers = teachers.filter((teacher) => {
+    const searchTermLower = searchQuery.toLowerCase();
+
+    return (
+      teacher.ID.toString().includes(searchTermLower) ||
+      teacher.FirstName.toLowerCase().includes(searchTermLower) ||
+      teacher.LastName.toLowerCase().includes(searchTermLower) ||
+      teacher.Age.toString().includes(searchTermLower)
+    );
+  });
+
   return (
     <div className="teacher-management-container">
       <h2>Teacher Management</h2>
@@ -81,7 +92,7 @@ const TeacherManagement = () => {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Search by name or age"
+          placeholder="Search by ID, First Name, Last Name, or Age"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -99,7 +110,7 @@ const TeacherManagement = () => {
           </tr>
         </thead>
         <tbody>
-          {teachers.map((teacher) => (
+          {filteredTeachers.map((teacher) => (
             <tr key={teacher.ID}>
               <td>{teacher.ID}</td>
               <td>{teacher.FirstName}</td>
